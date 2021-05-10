@@ -1,0 +1,17 @@
+config:
+  validation: true
+  warningsAsErrors: true
+
+complexity:
+  active: true
+  TooManyFunctions:
+    thresholdInFiles: 3
+
+console-reports:
+  active: true
+
+build:
+  maxIssues: 0
+
+processors:
+  active: true
