@@ -40,3 +40,17 @@ application {
     // Define the main class for the application.
     mainClass.set("gradle.simple.plugin.AppKt")
 }
+
+// Custom Plugin
+class GreetingPlugin: Plugin<Project> {
+    override fun apply(target: Project) {
+        target.task("hello") {
+            doLast {
+                println("Hello from GreetingPlugin!!")
+            }
+        }
+    }
+}
+
+// apply the plugin
+apply<GreetingPlugin>()
