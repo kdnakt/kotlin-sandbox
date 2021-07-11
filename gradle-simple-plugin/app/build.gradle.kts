@@ -54,3 +54,30 @@ class GreetingPlugin: Plugin<Project> {
 
 // apply the plugin
 apply<GreetingPlugin>()
+
+
+// Custom plugin extension
+abstract class GreetingPlugin2Extension {
+    abstract val message: Property<String>
+    init {
+        message.convention("Hello from GreetingPlugin2")
+    }
+}
+
+// java.lang.ArrayIndexOutOfBoundsException: 0
+//        at org.gradle.internal.instantiation.generator.DependencyInjectingInstantiator.addServicesToParameters(DependencyInjectingInstantiator.java:167)
+class GreetingPlugin2 @Inject constructor(): Plugin<Project> {
+    override fun apply(target: Project) {
+        val extension = project.extensions.create<GreetingPlugin2Extension>("greeting2")
+        target.task("hello2") {
+            doLast {
+                println(extension.message.get())
+            }
+        }
+    }
+}
+
+apply<GreetingPlugin2>()
+
+the<GreetingPlugin2Extension>().message.set("Hi from Gradle")
+
