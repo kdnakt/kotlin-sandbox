@@ -57,27 +57,52 @@ apply<GreetingPlugin>()
 
 
 // Custom plugin extension
-abstract class GreetingPlugin2Extension {
-    abstract val message: Property<String>
-    init {
-        message.convention("Hello from GreetingPlugin2")
-    }
-}
+//abstract class GreetingPlugin2Extension {
+//    abstract val message: Property<String>
+//    init {
+//        message.convention("Hello from GreetingPlugin2")
+//    }
+//}
+//
+//// java.lang.ArrayIndexOutOfBoundsException: 0
+////        at org.gradle.internal.instantiation.generator.DependencyInjectingInstantiator.addServicesToParameters(DependencyInjectingInstantiator.java:167)
+//class GreetingPlugin2 @Inject constructor(): Plugin<Project> {
+//    override fun apply(target: Project) {
+//        val extension = project.extensions.create<GreetingPlugin2Extension>("greeting2")
+//        target.task("hello2") {
+//            doLast {
+//                println(extension.message.get())
+//            }
+//        }
+//    }
+//}
+//
+//apply<GreetingPlugin2>()
+//
+//the<GreetingPlugin2Extension>().message.set("Hi from Gradle")
+//
 
-// java.lang.ArrayIndexOutOfBoundsException: 0
-//        at org.gradle.internal.instantiation.generator.DependencyInjectingInstantiator.addServicesToParameters(DependencyInjectingInstantiator.java:167)
-class GreetingPlugin2 @Inject constructor(): Plugin<Project> {
-    override fun apply(target: Project) {
-        val extension = project.extensions.create<GreetingPlugin2Extension>("greeting2")
-        target.task("hello2") {
-            doLast {
-                println(extension.message.get())
-            }
-        }
-    }
-}
-
-apply<GreetingPlugin2>()
-
-the<GreetingPlugin2Extension>().message.set("Hi from Gradle")
-
+// custom plugin with configuration block
+//interface GreetingPlugin3Extension {
+//    val message: Property<String>
+//    val greeter: Property<String>
+//}
+//
+//// also doesn't work...
+//class GreetingPlugin3 @Inject constructor(): Plugin<Project> {
+//    override fun apply(target: Project) {
+//        val extension = project.extensions.create<GreetingPlugin3Extension>("greeting3")
+//        target.task("hello3") {
+//            doLast {
+//                println("${extension.message.get()} from ${extension.greeter.get()}")
+//            }
+//        }
+//    }
+//}
+//
+//apply<GreetingPlugin3>()
+//
+//configure<GreetingPlugin3Extension> {
+//    message.set("Hi Hi Hi")
+//    greeter.set("Gradle")
+//}
