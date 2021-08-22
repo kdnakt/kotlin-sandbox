@@ -41,3 +41,11 @@ dependencies {
 
 // customize jar
 version = "0.1.0"
+
+tasks.jar {
+	manifest {
+		attributes(mapOf(
+			"Implementation-Title" to project.name,
+			"Implementation-Version" to project.version))
+	}
+}
