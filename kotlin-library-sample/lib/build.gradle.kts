@@ -39,6 +39,11 @@ dependencies {
     api("org.apache.commons:commons-math3:3.6.1")
 }
 
+// generate sources jar
+java {
+	withSourcesJar()
+}
+
 // customize jar
 version = "0.1.0"
 
