@@ -42,3 +42,12 @@ application {
     // Define the main class for the application.
     mainClass.set("sample.kotlin.app.AppKt")
 }
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
