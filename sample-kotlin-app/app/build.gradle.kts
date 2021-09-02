@@ -43,11 +43,21 @@ application {
     mainClass.set("sample.kotlin.app.AppKt")
 }
 
+// jacoco
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory.set(layout.buildDirectory.dir("customJacocoDir"))
+}
+
 tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+
+    reports {
+        csv.required.set(true)
+    }
 }
 
